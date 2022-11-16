@@ -553,7 +553,7 @@ main > article > .article-section {
 #contact--main footer {
   height: 10%;
   border-top: 1px solid var(--border-color);
-  font-size: clamp(0.9rem, 1vw, 1.1rem);
+  font-size: clamp(0.8rem, 1vw, 1rem);
 }
 .contact--footer--wrapper {
   max-width: var(--desktop);
