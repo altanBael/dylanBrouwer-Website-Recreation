@@ -7,6 +7,7 @@
   --pansy-purple: rgb(120, 40, 79);
   --background-color: rgb(19, 20, 21);
   --border-color: rgb(240, 230, 210, 0.1);
+  --padding--content: clamp(7rem, 10vw, 10rem);
   /* Gradient */
   --gradient1: #c8aa6e;
   --gradient2: #a0854b;
@@ -515,7 +516,6 @@ main > article > .article-section {
   );
   opacity: 0.1;
 }
-
 #contact--section {
   display: flex;
   max-width: var(--desktop);
@@ -527,7 +527,8 @@ main > article > .article-section {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 0 10%;
+  padding: 0 var(--padding--content);
+  z-index: 20;
 }
 #contact--article--left {
   flex-basis: calc(100% * (3 / 5));
@@ -577,12 +578,23 @@ main > article > .article-section {
 #contact--article--right {
   flex-basis: calc(100% * (2 / 5));
   border-left: 1px solid var(--border-color);
-  padding: 5% 10% 5% 5%;
-  background-color: var(--background-color);
-  opacity: 0.77;
+  position: relative;
   z-index: 20;
 }
-#contact--article--right * {
+#contact--form--background {
+  z-index: -1;
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  top: 0;
+  background-color: var(--background-color);
+  opacity: 0.77;
+}
+#contact--article--right--wrapper {
+  padding: 5rem var(--padding--content) 5rem 5rem;
+  height: 100%;
+}
+#contact--article--right--wrapper * {
   width: 100%;
 }
 #contact--article--right form {
@@ -671,24 +683,30 @@ main > article > .article-section {
 }
 #contact--main footer {
   height: 10%;
+  border-top: 1px solid var(--border-color);
+}
+.contact--footer--wrapper {
+  max-width: var(--desktop);
+  padding: 0 var(--padding--content);
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10%;
-  border-top: 1px solid var(--border-color);
+  margin: auto;
 }
-#contact--main footer a {
+#contact--main footer .contact--footer--wrapper a {
   z-index: 20;
 }
-#contact--main footer span {
+#contact--main footer .contact--footer--wrapper span {
   font-family: "space-grotesk", sans-serif;
   font-weight: 400;
   color: var(--eggshell-40);
   z-index: 20;
 }
-#contact--main footer span a {
+#contact--main footer .contact--footer--wrapper span a {
   text-decoration: underline;
 }
-#contact--main footer span a:hover {
+#contact--main footer .contact--footer--wrapper span a:hover {
   color: var(--eggshell);
 }
