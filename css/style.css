@@ -8,6 +8,7 @@
   --background-color: rgb(19, 20, 21);
   --border-color: rgb(240, 230, 210, 0.1);
   --padding--content: clamp(3rem, 10vw, 10rem);
+  --scrollbar--width: 0.8rem;
   /* Gradient */
   --gradient1: #c8aa6e;
   --gradient2: #a0854b;
@@ -17,6 +18,26 @@
   --tablet: 1200px;
   --portrait: 900px;
   --mobil: 600px;
+}
+/* width */
+::-webkit-scrollbar {
+  width: var(--scrollbar--width);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 50px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--eggshell-40);
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--eggshell);
 }
 @font-face {
   font-family: "Montserrat", sans-serif;
@@ -635,7 +656,7 @@ footer .contact--footer--wrapper span a:hover {
 #privacyPolicy--noise--background {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: calc(100% - var(--scrollbar--width));
   height: 100%;
   background: url(/img/noise-texture.png);
   opacity: 0.55;
