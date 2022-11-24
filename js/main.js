@@ -64,7 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const stickyMouse = (
     e,
-    interacting,
+    interactingMain,
+    interactingNav,
     socialLinksInteraction,
     showProjectInteraction
   ) => {
@@ -77,7 +78,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Cursor lagging begind
     const keyframes = {
-      transform: `translate(${x}px,${y}px) scale(${interacting ? 4 : 1})`,
+      transform: `translate(${x}px,${y}px) scale(${
+        interactingMain ? 5 : interactingNav ? 3 : 1
+      })`,
+      backdropFilter: `blur(${interactingMain ? 0.4 : 0}px)`,
+      mixBlendMode: interactingMain ? "multiply" : "difference",
     };
     mouseTrailer.animate(keyframes, {
       duration: 800,
@@ -88,26 +93,37 @@ document.addEventListener("DOMContentLoaded", function () {
     mouseTrailer.style.opacity = socialLinksInteraction ? 0 : 1;
 
     // Article Title hover interaction
-    mouseTrailer.style.background = showProjectInteraction
-      ? "rgb(19, 20, 21) url(/img/logo.svg) no-repeat center center"
-      : "";
-    mouseTrailer.style.backgroundSize = showProjectInteraction ? "40%" : "";
+    // mouseTrailer.style.background = showProjectInteraction
+    //   ? "rgb(19, 20, 21) url(/img/logo.svg) no-repeat center center"
+    //   : "";
+    // mouseTrailer.style.backgroundSize = showProjectInteraction ? "40%" : "";
   };
 
   window.onmousemove = (e) => {
     // Boolean = TRUE if cursor close to css selector target
-    const interactable = e.target.closest(
-        "#nav--links a, .article--nav, #nav--contact a, #nav--logo a, .article--title"
+    const interactableNav = e.target.closest(
+        "#nav--links a, #nav--contact a, #nav--logo a, .article--title, .article--nav"
       ),
-      interacting = interactable !== null;
+      interactingNav = interactableNav !== null;
+
+    const interactableMain = e.target.closest(
+        ".home-work-button, .home-contact, .home-about"
+      ),
+      interactingMain = interactableMain !== null;
 
     const socialLinks = e.target.closest("#nav--social a"),
       socialLinksInteraction = socialLinks !== null;
 
-    const showProject = e.target.closest(".article--title"),
+    const showProject = e.target.closest(".home-about"),
       showProjectInteraction = showProject !== null;
 
-    stickyMouse(e, interacting, socialLinksInteraction, showProjectInteraction);
+    stickyMouse(
+      e,
+      interactingMain,
+      interactingNav,
+      socialLinksInteraction,
+      showProjectInteraction
+    );
   };
 
   ////////////////////////////////////////////////////////////////

@@ -9,6 +9,7 @@
   --border-color: rgb(240, 230, 210, 0.1);
   --padding--content: clamp(3rem, 10vw, 10rem);
   --scrollbar--width: 0.8rem;
+  --logo-color: rgba(255, 255, 255);
   /* Gradient */
   --gradient1: #c8aa6e;
   --gradient2: #a0854b;
@@ -18,6 +19,14 @@
   --tablet: 1200px;
   --portrait: 900px;
   --mobil: 600px;
+}
+@font-face {
+  font-family: "Montserrat", sans-serif;
+  src: url(/font/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url(/font/SpaceGrotesk/SpaceGrotesk-VariableFont_wght.ttf);
 }
 /* width */
 ::-webkit-scrollbar {
@@ -38,14 +47,6 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--eggshell);
-}
-@font-face {
-  font-family: "Montserrat", sans-serif;
-  src: url(/font/Montserrat/Montserrat-Regular.ttf);
-}
-@font-face {
-  font-family: "Space Grotesk";
-  src: url(/font/SpaceGrotesk/SpaceGrotesk-VariableFont_wght.ttf);
 }
 @keyframes gradient--mail {
   from {
@@ -247,7 +248,6 @@ main > article[data-status="post--inactive"] {
 main > article > .article-section {
   height: 100%;
 }
-.article--description,
 .article--nav {
   border-left: 1px solid var(--border-color);
 }
@@ -322,7 +322,7 @@ main > article > .article-section {
   transition: all 0.3s ease-in-out;
 }
 .article--title--cross svg path {
-  fill: var(--eggshell);
+  fill: var(--Light-French-Beige);
 }
 .article--nav {
   display: flex;
@@ -360,6 +360,68 @@ main > article > .article-section {
 }
 #article--nav--right:hover svg {
   transform: translateX(2.5rem);
+}
+
+/* Home Page */
+
+:root:has(#home-title:hover) {
+  --background-color: #ffffff;
+  --Light-French-Beige: rgb(120, 90, 40);
+  --eggshell-40: rgb(30, 35, 40);
+  --border-color: rgb(30, 35, 40, 0.2);
+  --logo-color: rgb(19, 20, 21);
+}
+#nav--logo a svg {
+  width: 30px;
+}
+#logo--body {
+  fill: var(--logo-color);
+}
+.home-work-button h3 {
+  font-size: clamp(1.4rem, 5vw, 3rem);
+  text-transform: uppercase;
+  color: var(--Light-French-Beige);
+  margin: 0;
+  width: fit-content;
+}
+.home-work-button-wrapper {
+  width: 50%;
+  height: 3rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.home-work-title {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 500ms ease-in-out;
+}
+.home-work-title svg path {
+  fill: var(--Light-French-Beige);
+}
+.home-work-title:last-of-type {
+  top: 3rem;
+}
+.home-work-button:hover .home-work-title {
+  transform: translateY(-3rem);
+}
+.home-work-button:hover {
+  background-color: var(--eggshell-005);
+  transition: transform 500ms ease-in-out;
+}
+.home-contact:hover {
+  background-color: var(--eggshell-005);
+}
+.home-contact p {
+  transition: transform 500ms ease-in-out;
+}
+.home-contact:hover p {
+  color: var(--eggshell);
+  transform: translateY(-1rem);
+  transition: transform 500ms ease-in-out;
 }
 
 /* Contact Page */
@@ -632,7 +694,8 @@ footer .contact--footer--wrapper span a:hover {
   text-transform: uppercase;
   margin-bottom: 3rem;
 }
-#privacyPolicy--wrapper p {
+#privacyPolicy--wrapper p,
+#privacyPolicy--wrapper ul {
   max-width: 800px;
   font-size: clamp(0.8rem, 2vw, 1.2rem);
   line-height: 160%;
@@ -709,6 +772,7 @@ footer .contact--footer--wrapper span a:hover {
   }
   #work--main {
     overflow-y: auto;
+    overflow-x: hidden;
   }
   #nav--logo {
     flex-basis: calc(100% / 4);
@@ -722,9 +786,8 @@ footer .contact--footer--wrapper span a:hover {
     grid-template-rows: 1.5fr repeat(3, 0.75fr) 0.25fr;
     height: max(900px, 100%);
   }
-  article > *,
-  #article--nav--right {
-    border: none;
+  .article--nav {
+    border-left: none;
   }
   .article--description {
     order: 3;
@@ -800,7 +863,7 @@ footer .contact--footer--wrapper span a:hover {
   }
   #work--main > article {
     grid-template-rows: 1fr repeat(3, 0.5fr);
-    height: max(700px, 100%);
+    height: auto;
   }
   .article--title--h2 {
     padding-left: 1.8rem;
@@ -865,5 +928,11 @@ footer .contact--footer--wrapper span a:hover {
   }
   #contact--article--right form button {
     margin-top: 1rem;
+  }
+
+  /* Home Page */
+
+  .home-work-title svg {
+    transform: scale(50%);
   }
 }
