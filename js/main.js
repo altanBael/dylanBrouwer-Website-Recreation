@@ -60,6 +60,7 @@ window.matchMedia("(max-width: 910px)").onchange = (e) => {
 ////////////////////////////////////////////////////////////////
 
 document.addEventListener("DOMContentLoaded", function () {
+  //Mouse Tracker //////////////////////////////////
   const mouseTrailer = document.getElementById("mouse--trailer");
 
   const stickyMouse = (
@@ -67,7 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
     interactingMain,
     interactingNav,
     socialLinksInteraction,
-    showProjectInteraction
+    showProjectInteraction,
+    homeContactHover,
+    homeWorkHover
   ) => {
     // Capture mouse position
     const x = e.clientX - mouseTrailer.offsetWidth / 2,
@@ -76,27 +79,47 @@ document.addEventListener("DOMContentLoaded", function () {
     // Reveal the mouse trailer
     mouseTrailer.style.opacity = "1";
 
-    // Cursor lagging begind
+    // Cursor lagging behind
     const keyframes = {
       transform: `translate(${x}px,${y}px) scale(${
-        interactingMain ? 5 : interactingNav ? 3 : 1
+        interactingMain ? 6 : interactingNav ? 3 : 1
       })`,
-      backdropFilter: `blur(${interactingMain ? 0.4 : 0}px)`,
-      mixBlendMode: interactingMain ? "multiply" : "difference",
     };
     mouseTrailer.animate(keyframes, {
-      duration: 800,
+      duration: 100,
       fill: "forwards",
     });
+
+    // Overlay-backdropBlur on home page mainInteraction
+    mouseTrailer.style.backdropFilter = `blur(${interactingMain ? 1 : 0}px)`;
+    mouseTrailer.style.mixBlendMode = interactingMain ? "initial" : "";
+    mouseTrailer.style.backgroundColor = interactingMain
+      ? "var(--Light-French-Beige-20)"
+      : "rgb(240, 230, 210)";
 
     // Social nav hover interaction
     mouseTrailer.style.opacity = socialLinksInteraction ? 0 : 1;
 
-    // Article Title hover interaction
-    // mouseTrailer.style.background = showProjectInteraction
-    //   ? "rgb(19, 20, 21) url(/img/logo.svg) no-repeat center center"
-    //   : "";
-    // mouseTrailer.style.backgroundSize = showProjectInteraction ? "40%" : "";
+    // Store :root element and mouseTrailerContent
+    const rootContent = document.querySelector(":root");
+
+    // Set mouseTrailer content appropriately
+    rootContent.style.setProperty(
+      "--content-before",
+      showProjectInteraction
+        ? "'About'"
+        : homeContactHover
+        ? "'Contact'"
+        : homeWorkHover
+        ? "'Work'"
+        : ""
+    );
+
+    // Scale mousTrailer content
+    rootContent.style.setProperty(
+      "--mouseContentScale",
+      interactingMain ? 1 : 0
+    );
   };
 
   window.onmousemove = (e) => {
@@ -116,13 +139,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const showProject = e.target.closest(".home-about"),
       showProjectInteraction = showProject !== null;
+    const homeContact = e.target.closest(".home-contact"),
+      homeContactHover = homeContact !== null;
+    const homeWork = e.target.closest(".home-work-button"),
+      homeWorkHover = homeWork !== null;
 
     stickyMouse(
       e,
       interactingMain,
       interactingNav,
       socialLinksInteraction,
-      showProjectInteraction
+      showProjectInteraction,
+      homeContactHover,
+      homeWorkHover
     );
   };
 

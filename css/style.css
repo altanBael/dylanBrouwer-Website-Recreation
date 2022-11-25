@@ -1,4 +1,10 @@
 :root {
+  --padding--content: clamp(3rem, 10vw, 10rem);
+  --scrollbar--width: 0.8rem;
+  /* Mouse Trailer  */
+  --content-before: "";
+  --mouseContentScale: 0;
+  /* Colors */
   --Light-French-Beige: rgb(200, 170, 110);
   --Light-French-Beige-20: rgb(200, 170, 110, 0.2);
   --eggshell: rgb(240, 230, 210);
@@ -7,8 +13,6 @@
   --pansy-purple: rgb(120, 40, 79);
   --background-color: rgb(19, 20, 21);
   --border-color: rgb(240, 230, 210, 0.1);
-  --padding--content: clamp(3rem, 10vw, 10rem);
-  --scrollbar--width: 0.8rem;
   --logo-color: rgba(255, 255, 255);
   /* Gradient */
   --gradient1: #c8aa6e;
@@ -79,14 +83,16 @@
 }
 html {
   background-color: var(--background-color);
-  -web-font-smoothing: subpixel-antialiased;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
 body {
   background-color: var(--background-color);
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 100vh;
+  height: 100%;
   margin: auto;
   overflow: hidden;
 }
@@ -103,6 +109,17 @@ body {
   transition: opacity 0.5s ease;
   mix-blend-mode: difference;
   opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#mouse--trailer::before {
+  content: var(--content-before);
+  font-family: "Montserrat", serif;
+  color: var(--Light-French-Beige);
+  font-size: 0.2rem;
+  transform: scale(var(--mouseContentScale));
+  transition: transform 500ms ease-in-out;
 }
 h1,
 h2,
@@ -412,16 +429,33 @@ main > article > .article-section {
   background-color: var(--eggshell-005);
   transition: transform 500ms ease-in-out;
 }
+.home-contact {
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 2rem;
+}
+.home-contact svg {
+  width: 3rem;
+}
+.home-contact svg path {
+  fill: var(--eggshell-40);
+}
 .home-contact:hover {
   background-color: var(--eggshell-005);
 }
-.home-contact p {
+.home-contact p,
+.home-contact svg {
   transition: transform 500ms ease-in-out;
 }
-.home-contact:hover p {
+.home-contact:hover p,
+.home-contact:hover svg {
   color: var(--eggshell);
   transform: translateY(-1rem);
   transition: transform 500ms ease-in-out;
+}
+.home-contact:hover svg {
+  transform: translateY(-1rem) rotate(45deg);
 }
 
 /* Contact Page */
