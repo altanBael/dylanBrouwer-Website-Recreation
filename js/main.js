@@ -1,4 +1,42 @@
-////////////////////////////////////////////////////////////////////////////
+// Left and Right animation AboupPage exp section
+let activeIndexAboutExp = 0;
+const aboutExpItem = document.getElementsByClassName("about-exp-item"),
+  aboutExpContainer = document.getElementById("about-exp-item-container");
+
+const aboutExpRight = () => {
+  activeIndexAboutExp =
+    activeIndexAboutExp < aboutExpItem.length - 1
+      ? activeIndexAboutExp + 1
+      : activeIndexAboutExp;
+  aboutExpContainer.style.transform = `translate(calc(-1*(${aboutExpItem[1].offsetWidth}px + 4rem)*${activeIndexAboutExp}), 0px)`;
+};
+const aboutExpLeft = () => {
+  activeIndexAboutExp =
+    activeIndexAboutExp > 0 ? activeIndexAboutExp - 1 : activeIndexAboutExp;
+  aboutExpContainer.style.transform = `translate(calc(-1*(${aboutExpItem[1].offsetWidth}px + 4rem)*${activeIndexAboutExp}), 0px)`;
+};
+
+// AboutPage Exp Drag and Drop scroll
+document
+  .getElementById("about-exp-body")
+  .addEventListener("pointerdown", (e) => {
+    aboutExpScroll(e);
+
+    document.addEventListener("pointermove", aboutExpScroll);
+    document.addEventListener(
+      "pointerup",
+      () => {
+        aboutExpContainer.style.transition = "transform 300ms ease-in-out";
+        document.removeEventListener("pointermove", aboutExpScroll);
+      },
+      { once: true }
+    );
+  });
+const aboutExpScroll = (e, aboutExpPointerdown) => {
+  aboutExpContainer.style.transition = "none";
+  aboutExpContainer.style.transform = `translateX(${e.clientX}px)`;
+};
+
 // Left and Right slider navigation animation
 let activeIndex = 0;
 const articles = document.getElementsByTagName("article");
@@ -60,9 +98,27 @@ window.matchMedia("(max-width: 910px)").onchange = (e) => {
 ////////////////////////////////////////////////////////////////
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Eye tracking cursor on desktop about page ///////////////////////////
+  const eyeMovement = (e) => {
+    const aboutEye = document.getElementById("about-logo-goldenEye"),
+      x =
+        (e.clientX * aboutEye.getBBox().width) / window.innerWidth -
+        aboutEye.getBBox().width / 2,
+      y =
+        (e.clientY * aboutEye.getBBox().height) / window.innerHeight -
+        aboutEye.getBBox().width / 2,
+      aboutBody = this.getElementById("about--body");
+
+    aboutEye.style.transform = `translate(${x}px,${y}px)`;
+    aboutBody.onpointerleave = () => {
+      setTimeout(() => {
+        aboutEye.style.transform = `translate(0px,0px)`;
+      }, 500);
+    };
+  };
+
   //Mouse Tracker //////////////////////////////////
   const mouseTrailer = document.getElementById("mouse--trailer");
-
   const stickyMouse = (
     e,
     interactingMain,
@@ -75,10 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Capture mouse position
     const x = e.clientX - mouseTrailer.offsetWidth / 2,
       y = e.clientY - mouseTrailer.offsetHeight / 2;
-
     // Reveal the mouse trailer
     mouseTrailer.style.opacity = "1";
-
     // Cursor lagging behind
     const keyframes = {
       transform: `translate(${x}px,${y}px) scale(${
@@ -89,20 +143,16 @@ document.addEventListener("DOMContentLoaded", function () {
       duration: 100,
       fill: "forwards",
     });
-
     // Overlay-backdropBlur on home page mainInteraction
     mouseTrailer.style.backdropFilter = `blur(${interactingMain ? 1 : 0}px)`;
     mouseTrailer.style.mixBlendMode = interactingMain ? "initial" : "";
     mouseTrailer.style.backgroundColor = interactingMain
       ? "var(--Light-French-Beige-20)"
       : "rgb(240, 230, 210)";
-
     // Social nav hover interaction
     mouseTrailer.style.opacity = socialLinksInteraction ? 0 : 1;
-
-    // Store :root element and mouseTrailerContent
+    // Store :root element
     const rootContent = document.querySelector(":root");
-
     // Set mouseTrailer content appropriately
     rootContent.style.setProperty(
       "--content-before",
@@ -114,8 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ? "'Work'"
         : ""
     );
-
-    // Scale mousTrailer content
+    // Scale mouseTrailer content
     rootContent.style.setProperty(
       "--mouseContentScale",
       interactingMain ? 1 : 0
@@ -153,6 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
       homeContactHover,
       homeWorkHover
     );
+    eyeMovement(e);
   };
 
   ////////////////////////////////////////////////////////////////

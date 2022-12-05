@@ -9,6 +9,7 @@
   --Light-French-Beige-20: rgb(200, 170, 110, 0.2);
   --eggshell: rgb(240, 230, 210);
   --eggshell-40: rgb(240, 230, 210, 0.4);
+  --eggshell-20: rgb(240, 230, 210, 0.2);
   --eggshell-005: rgb(240, 230, 210, 0.05);
   --pansy-purple: rgb(120, 40, 79);
   --background-color: rgb(19, 20, 21);
@@ -25,7 +26,7 @@
   --mobil: 600px;
 }
 @font-face {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat";
   src: url(/font/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 @font-face {
@@ -123,7 +124,8 @@ body {
 }
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: "Montserrat", serif;
   font-weight: 900;
   color: var(--Light-French-Beige);
@@ -456,6 +458,226 @@ main > article > .article-section {
 }
 .home-contact:hover svg {
   transform: translateY(-1rem) rotate(45deg);
+}
+
+/* About Page */
+
+#about--main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.about-section {
+  width: min(var(--desktop), 100%);
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+}
+.about-background {
+  z-index: initial;
+  position: absolute;
+  top: 0;
+  height: auto;
+}
+.about-landing-container {
+  height: 100vh;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.about-landing-title-container {
+  width: auto;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+}
+.about-landing-title-container h1 {
+  width: fit-content;
+  margin: 0;
+  font-size: clamp(3rem, 10vw, 10rem);
+  line-height: 88%;
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  z-index: 100;
+}
+.about-landing-logo-container {
+  position: absolute;
+  top: 10%;
+  right: 0;
+  align-items: flex-start;
+  height: 50%;
+}
+.about-landing-logo-container svg {
+  width: clamp(9rem, 21vw, 30rem);
+}
+#about-logo-goldenEye {
+  transition: transform 100ms ease-in;
+}
+
+#about-bio-text-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15rem;
+}
+.about-bio-item {
+  width: 40%;
+  padding: 0 5rem;
+}
+#about-bio-head-text > p {
+  color: var(--eggshell);
+  font-size: 2rem;
+  line-height: 140%;
+  font-weight: 400;
+}
+#about-bio-bottom-text {
+  font-size: 1rem;
+  line-height: 160%;
+  font-weight: 400;
+}
+
+#about-exp-container {
+  height: auto;
+  flex-direction: column;
+}
+#about-exp-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+#about-exp-title {
+  display: flex;
+  align-items: center;
+}
+#about-exp-title h2 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+#about-exp-button-container {
+  display: flex;
+  gap: 2rem;
+}
+.about-exp-button {
+  width: 4.4rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 1px solid var(--eggshell-40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.about-exp-button svg {
+  width: 50%;
+}
+.about-exp-button-left svg {
+  transform: rotate(180deg);
+}
+.about-exp-button:hover {
+  background-color: var(--Light-French-Beige-20);
+  border: 1px solid var(--Light-French-Beige);
+  cursor: pointer;
+}
+.about-exp-button-left:hover svg {
+  transform: translate(-0.2rem, 0) rotate(180deg);
+  transition: transform 300ms ease-in-out;
+}
+.about-exp-button-right:hover svg {
+  transform: translate(0.2rem, 0);
+  transition: transform 300ms ease-in-out;
+}
+#about-exp-body {
+  display: flex;
+}
+#about-exp-item-container {
+  height: auto;
+  display: flex;
+  margin-bottom: 10rem;
+  transition: transform 300ms ease-in-out;
+  touch-action: none;
+}
+.about-exp-item {
+  width: 35rem;
+  padding: 3.4rem;
+  background-color: var(--eggshell-005);
+  border: 1px solid var(--eggshell-20);
+  border-radius: 25px;
+  margin-right: 4rem;
+}
+.about-exp-item > * {
+  margin-right: 1rem;
+}
+.about-exp-item-date p {
+  margin: 0 0 1.2rem 0;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.about-exp-item-title h3 {
+  margin: 0 0 1.2rem 0;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+.about-exp-item-tag {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.about-exp-item-tag-name {
+  outline: 1px solid var(--Light-French-Beige);
+  border-radius: 50px;
+  padding: 0.5rem;
+}
+.about-exp-item-tag-name h4 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+.about-exp-item-text p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 200%;
+}
+
+#about--gradient {
+  position: absolute;
+  top: -15rem;
+  right: 0;
+  width: clamp(50rem, 60vw, 65rem);
+  aspect-ratio: 1/1;
+  background-image: radial-gradient(
+    circle farthest-corner at 45% 40%,
+    var(--Light-French-Beige),
+    var(--Light-French-Beige) 0%,
+    rgba(19, 20, 21, 0) 50%
+  );
+  opacity: 0.6;
+}
+#about--gradient--small {
+  position: absolute;
+  top: 30rem;
+  right: 0;
+  width: 30rem;
+  height: 30rem;
+  border-radius: 100%;
+  background-image: radial-gradient(
+    circle farthest-corner at 40% 50%,
+    var(--Light-French-Beige),
+    rgba(19, 20, 21, 0) 50%
+  );
+  opacity: 0.1;
 }
 
 /* Contact Page */
@@ -844,7 +1066,14 @@ footer .contact--footer--wrapper span a:hover {
     font-size: 3rem;
     line-height: 2.6rem;
   }
+
+  /* About Page  */
+
+  .about-landing-title-container h1 {
+    /* font-size: 5rem; */
+  }
 }
+
 @media (max-width: 900px) {
   #nav--button--menu {
     display: flex;
@@ -968,5 +1197,68 @@ footer .contact--footer--wrapper span a:hover {
 
   .home-work-title svg {
     transform: scale(50%);
+  }
+
+  /* About Page */
+
+  .about-landing-container {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10%;
+    height: min(600px, 100%);
+  }
+  .about-landing-logo-container,
+  .about-landing-title-container {
+    position: initial;
+  }
+  .about-landing-title-container {
+    order: 2;
+    align-items: center;
+  }
+  .about-landing-title-container h1 {
+    font-size: clamp(2rem, 10vw, 5rem);
+  }
+  .about-landing-logo-container {
+    transform: translateX(1rem);
+  }
+  .about-bio-item {
+    width: 80%;
+    padding: 0;
+  }
+  #about-bio-text-container {
+    margin-bottom: 0;
+  }
+  #about-bio-portrait {
+    display: none;
+  }
+  #about-bio-head-text > p {
+    font-size: 1.4rem;
+    line-height: 110%;
+    font-weight: 400;
+  }
+  #about-bio-bottom-text {
+    font-size: 1rem;
+    line-height: 140%;
+    font-weight: 400;
+  }
+
+  #about-exp-header {
+    margin-bottom: 2rem;
+  }
+  #about-exp-container {
+    align-items: flex-start;
+  }
+  #about-exp-title h2 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    margin-right: 1rem;
+  }
+  #about-exp-button-container {
+    gap: clamp(1rem, 4vw, 2rem);
+  }
+  .about-exp-button {
+    width: clamp(2.8rem, 7vw, 4.4rem);
+  }
+  .about-exp-item {
+    width: min(35rem, 100vw);
   }
 }
