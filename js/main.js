@@ -1,99 +1,234 @@
-// Left and Right animation AboupPage exp section
-let activeIndexAboutExp = 0;
-const aboutExpItem = document.getElementsByClassName("about-exp-item"),
-  aboutExpContainer = document.getElementById("about-exp-item-container");
+// Module import
+import "https://rawcdn.githack.com/flackr/scroll-timeline/3063e156535f3ab1ffc8a4000ffdd3290232c121/dist/scroll-timeline.js";
 
-const aboutExpRight = () => {
-  activeIndexAboutExp =
-    activeIndexAboutExp < aboutExpItem.length - 1
-      ? activeIndexAboutExp + 1
-      : activeIndexAboutExp;
-  aboutExpContainer.style.transform = `translate(calc(-1*(${aboutExpItem[1].offsetWidth}px + 4rem)*${activeIndexAboutExp}), 0px)`;
-};
-const aboutExpLeft = () => {
-  activeIndexAboutExp =
-    activeIndexAboutExp > 0 ? activeIndexAboutExp - 1 : activeIndexAboutExp;
-  aboutExpContainer.style.transform = `translate(calc(-1*(${aboutExpItem[1].offsetWidth}px + 4rem)*${activeIndexAboutExp}), 0px)`;
-};
+// If page is about.html
+if (document.getElementById("about--body") !== null) {
+  // Left and Right animation AboupPage exp section
+  let activeIndexAboutExp = 0;
+  const aboutExpItem = document.getElementsByClassName("about-exp-item"),
+    aboutExpContainer = document.getElementById("about-exp-item-container");
 
-// AboutPage Exp Drag and Drop scroll
-document
-  .getElementById("about-exp-body")
-  .addEventListener("pointerdown", (e) => {
-    aboutExpScroll(e);
+  const aboutExpButtonRight = document.querySelector(".about-exp-button-right"),
+    aboutExpButtonLeft = document.querySelector(".about-exp-button-left");
 
-    document.addEventListener("pointermove", aboutExpScroll);
-    document.addEventListener(
-      "pointerup",
-      () => {
-        aboutExpContainer.style.transition = "transform 300ms ease-in-out";
-        document.removeEventListener("pointermove", aboutExpScroll);
-      },
-      { once: true }
+  const aboutExpRight = (e) => {
+    activeIndexAboutExp =
+      0 || activeIndexAboutExp % 1 != 0
+        ? Math.ceil(activeIndexAboutExp)
+        : activeIndexAboutExp < aboutExpItem.length - 1
+        ? activeIndexAboutExp + 1
+        : activeIndexAboutExp;
+    aboutExpContainer.style.transform = `translate(calc(-1*(${aboutExpItem[1].offsetWidth}px + 4rem)*${activeIndexAboutExp}), 0px)`;
+    aboutExpContainer.dataset.spacingX =
+      -1 *
+      (aboutExpItem[1].offsetWidth +
+        parseFloat(getComputedStyle(aboutExpItem[1]).marginRight)) *
+      activeIndexAboutExp;
+    aboutExpButtonRight.setPointerCapture(e.pointerId);
+  };
+  aboutExpButtonRight.onpointerdown = aboutExpRight;
+  aboutExpButtonRight.onpointerup = (e) => {
+    aboutExpButtonRight.releasePointerCapture(e.pointerId);
+  };
+
+  const aboutExpLeft = (e) => {
+    activeIndexAboutExp =
+      0 || activeIndexAboutExp % 1 != 0
+        ? Math.floor(activeIndexAboutExp)
+        : activeIndexAboutExp > 0
+        ? activeIndexAboutExp - 1
+        : activeIndexAboutExp;
+    aboutExpContainer.style.transform = `translate(calc(-1*(${aboutExpItem[1].offsetWidth}px + 4rem)*${activeIndexAboutExp}), 0px)`;
+    aboutExpContainer.dataset.spacingX =
+      -1 *
+      (aboutExpItem[1].offsetWidth +
+        parseFloat(getComputedStyle(aboutExpItem[1]).marginRight)) *
+      activeIndexAboutExp;
+    aboutExpButtonLeft.setPointerCapture(e.pointerId);
+  };
+  aboutExpButtonLeft.onpointerdown = aboutExpLeft;
+  aboutExpButtonLeft.onpointerup = (e) => {
+    aboutExpButtonRight.releasePointerCapture(e.pointerId);
+  };
+
+  // AboutPage Exp Drag and Drop scroll
+  const activeIndexAboutExpUpdater = () => {
+    activeIndexAboutExp =
+      -1 *
+      (aboutExpContainer.dataset.spacingX /
+        (aboutExpItem[1].offsetWidth +
+          parseFloat(getComputedStyle(aboutExpItem[1]).marginRight)));
+  };
+  const maxDelta =
+    -1 *
+    (aboutExpItem[1].offsetWidth +
+      parseFloat(getComputedStyle(aboutExpItem[1]).marginRight)) *
+    (aboutExpItem.length - 1);
+
+  const aboutExpSlidingOn = (e) => {
+    aboutExpContainer.dataset.pointerDown = e.clientX;
+    aboutExpContainer.onpointermove = slide;
+    aboutExpContainer.setPointerCapture(e.pointerId);
+  };
+  const aboutExpSlidingOff = (e) => {
+    aboutExpContainer.dataset.spacingX = Math.max(
+      Math.min(
+        parseFloat(aboutExpContainer.dataset.spacingX) +
+          (e.clientX - parseFloat(aboutExpContainer.dataset.pointerDown)) * 2,
+        0
+      ),
+      maxDelta
     );
+    activeIndexAboutExpUpdater();
+    aboutExpContainer.style.transition = "transform 300ms ease-in-out";
+    aboutExpContainer.onpointermove = null;
+    aboutExpContainer.releasePointerCapture(e.pointerId);
+  };
+  const slide = (e) => {
+    aboutExpContainer.style.transition = "transform 300ms ease-out";
+    aboutExpContainer.style.transform = `translateX(${Math.max(
+      Math.min(
+        parseFloat(aboutExpContainer.dataset.spacingX) +
+          (e.clientX - parseFloat(aboutExpContainer.dataset.pointerDown)) * 2,
+        0
+      ),
+      maxDelta
+    )}px)`;
+  };
+  document.getElementById("about-exp-body").onpointerdown = aboutExpSlidingOn;
+  document.getElementById("about-exp-body").onpointerup = aboutExpSlidingOff;
+
+  // Scroll Animation
+  const scrollContainer = document.getElementById("about--main");
+
+  const scrollTracker = document.querySelector(".scroll-tracker");
+
+  const aboutTitleScroll = document.getElementById("about-tools-title-scroll"),
+    aboutTitleScrollHeight = aboutTitleScroll.offsetHeight,
+    aboutTitleScrollTop = aboutTitleScroll.offsetTop;
+
+  const scrollTrackingTimeline = new ScrollTimeline({
+    source: scrollContainer,
+    scrollSource: scrollContainer, // For legacy implementations
+    orientation: "block",
+    scrollOffsets: [CSS.percent(0), CSS.percent(100)],
   });
-const aboutExpScroll = (e, aboutExpPointerdown) => {
-  aboutExpContainer.style.transition = "none";
-  aboutExpContainer.style.transform = `translateX(${e.clientX}px)`;
-};
-
-// Left and Right slider navigation animation
-let activeIndex = 0;
-const articles = document.getElementsByTagName("article");
-
-const rightClick = () => {
-  // Get articles index
-  const nextIndex =
-    activeIndex + 1 <= articles.length - 1 ? activeIndex + 1 : 0;
-  const currentArticle = document.querySelector(
-    `article[data-index='${activeIndex}']`
+  scrollTracker.animate(
+    {
+      transform: ["scaleX(0)", "scaleX(1)"],
+    },
+    {
+      duration: 1,
+      fill: "both",
+      timeline: scrollTrackingTimeline,
+    }
   );
-  const nextArticle = document.querySelector(
-    `article[data-index='${nextIndex}']`
-  );
-  // Exit-right of the active article
-  currentArticle.dataset.status = "pre--active";
 
-  nextArticle.dataset.status = "post--inactive";
-  setTimeout(() => {
-    // Update articles to active
-    nextArticle.dataset.status = "active";
-    activeIndex = nextIndex;
+  const scrollaboutTitle = new ScrollTimeline({
+    source: scrollContainer,
+    scrollSource: scrollContainer, // For legacy implementations
+    scrollOffsets: [
+      // CSS.px(aboutTitleScrollTop + aboutTitleScrollHeight - window.innerHeight),
+      // CSS.px(aboutTitleScrollTop),
+      { target: aboutTitleScroll, edge: "end", threshold: "0" },
+      { target: aboutTitleScroll, edge: "start", threshold: "1" },
+    ],
   });
-};
-
-const leftClick = () => {
-  // Get articles index
-  const nextIndex =
-    activeIndex - 1 >= 0 ? activeIndex - 1 : articles.length - 1;
-  const currentArticle = document.querySelector(
-    `article[data-index='${activeIndex}']`
+  aboutTitleScroll.animate(
+    {
+      transform: ["translateX(100%)", "translateX(-25%)"],
+    },
+    {
+      duration: 1,
+      fill: "both",
+      timeline: scrollaboutTitle,
+    }
   );
-  const nextArticle = document.querySelector(
-    `article[data-index='${nextIndex}']`
-  );
-  // Update articles to inactive
-  currentArticle.dataset.status = "post--active";
+}
 
-  nextArticle.dataset.status = "pre--inactive";
-  setTimeout(() => {
-    // Update articles to active
-    nextArticle.dataset.status = "active";
-    activeIndex = nextIndex;
-  });
-};
+if (document.querySelector("#work--body") !== null) {
+  // Left and Right slider navigation animation
+  let activeIndex = 0,
+    nextIndex = 0;
+  const articles = document.getElementsByTagName("article");
+  const workRightButton = document.querySelectorAll(".article--nav--right"),
+    workLeftButton = document.querySelectorAll(".article--nav--left");
+
+  const rightClickDown = (e) => {
+    workRightButton[activeIndex].setPointerCapture(e.pointerId);
+    // Get articles index
+    nextIndex = activeIndex + 1 <= articles.length - 1 ? activeIndex + 1 : 0;
+    const currentArticle = document.querySelector(
+      `article[data-index='${activeIndex}']`
+    );
+    const nextArticle = document.querySelector(
+      `article[data-index='${nextIndex}']`
+    );
+    // Exit-right of the active article
+    currentArticle.dataset.status = "pre--active";
+    nextArticle.dataset.status = "post--inactive";
+
+    setTimeout(() => {
+      // Update articles to active
+      nextArticle.dataset.status = "active";
+      activeIndex = nextIndex;
+    });
+  };
+  const rightClickUp = (e) => {
+    workRightButton[activeIndex].releasePointerCapture(e.pointerId);
+  };
+  for (var i = 0; i < workRightButton.length; i++) {
+    workRightButton[i].onpointerdown = rightClickDown;
+    workRightButton[i].onpointerup = rightClickUp;
+  }
+
+  const leftClickDown = (e) => {
+    // Get articles index
+    const nextIndex =
+      activeIndex - 1 >= 0 ? activeIndex - 1 : articles.length - 1;
+    const currentArticle = document.querySelector(
+      `article[data-index='${activeIndex}']`
+    );
+    const nextArticle = document.querySelector(
+      `article[data-index='${nextIndex}']`
+    );
+    // Update articles to inactive
+    currentArticle.dataset.status = "post--active";
+    nextArticle.dataset.status = "pre--inactive";
+
+    setTimeout(() => {
+      // Update articles to active
+      nextArticle.dataset.status = "active";
+      activeIndex = nextIndex;
+    });
+    workLeftButton[activeIndex].setPointerCapture(e.pointerId);
+  };
+  const leftClickUp = (e) => {
+    workLeftButton[activeIndex].releasePointerCapture(e.pointerId);
+  };
+  for (var i = 0; i < workRightButton.length; i++) {
+    workLeftButton[i].onpointerdown = leftClickDown;
+    workLeftButton[i].onpointerup = leftClickUp;
+  }
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //toggle menu
 const nav = document.getElementsByTagName("nav");
-const toggleMenu = () => {
+const mobilMenu = document.querySelector("#nav--button--menu");
+const toggleMenu = (e) => {
   nav[0].dataset.transitionable = "true";
   nav[0].dataset.toggled = nav[0].dataset.toggled === "true" ? "false" : "true";
+  mobilMenu.setPointerCapture(e.pointerId);
 };
 
 window.matchMedia("(max-width: 910px)").onchange = (e) => {
   nav[0].dataset.transitionable = "false";
   nav[0].dataset.toggled = "false";
+};
+mobilMenu.onpointerdown = toggleMenu;
+mobilMenu.onpointerup = (e) => {
+  mobilMenu.releasePointerCapture(e.pointerId);
 };
 ////////////////////////////////////////////////////////////////
 
@@ -202,32 +337,36 @@ document.addEventListener("DOMContentLoaded", function () {
       homeContactHover,
       homeWorkHover
     );
-    eyeMovement(e);
+    if (document.getElementById("about--body") !== null) {
+      eyeMovement(e);
+    }
   };
 
-  ////////////////////////////////////////////////////////////////
-  // Ramdomized stars
-  let indexStar = 0,
-    intervalStar = 1000;
+  if (document.getElementById("contact--body") !== null) {
+    // Ramdomized stars
+    let indexStar = 0,
+      intervalStar = 1000;
 
-  const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    const rand = (min, max) =>
+      Math.floor(Math.random() * (max - min + 1)) + min;
 
-  const animateStar = (star) => {
-    star.style.setProperty("--top--star", `${rand(-5, 90)}%`);
-    star.style.setProperty("--left--star", `${rand(-5, 100)}%`);
+    const animateStar = (star) => {
+      star.style.setProperty("--top--star", `${rand(-5, 90)}%`);
+      star.style.setProperty("--left--star", `${rand(-5, 100)}%`);
 
-    star.style.animation = "none";
-    star.offsetHeight;
-    star.style.animation = "";
-  };
+      star.style.animation = "none";
+      star.offsetHeight;
+      star.style.animation = "";
+    };
 
-  for (const stars of document.getElementsByClassName("star--wrapper")) {
-    setTimeout(() => {
-      animateStar(stars);
-
-      setInterval(() => {
+    for (const stars of document.getElementsByClassName("star--wrapper")) {
+      setTimeout(() => {
         animateStar(stars);
-      }, 1000);
-    }, indexStar++ * (intervalStar / document.getElementsByClassName("star--wrapper").length));
+
+        setInterval(() => {
+          animateStar(stars);
+        }, 1000);
+      }, indexStar++ * (intervalStar / document.getElementsByClassName("star--wrapper").length));
+    }
   }
 });

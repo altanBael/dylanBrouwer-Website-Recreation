@@ -8,11 +8,12 @@
     <link rel="icon" type="image/x-icon" href="/img/logoWhite_darkBackground_512x512.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1,  user-scalable=yes" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js" type="module" defer></script>
     <script src="https://kit.fontawesome.com/3cb005be41.js" crossorigin="anonymous"></script>
 </head>
 
 <body id="about--body">
+    <div class="scroll-tracker"></div>
     <div id="mouse--trailer" class="trailer--icon"></div>
     <nav data-toggled="false" data-transitionable="false">
         <div id="nav--logo" class="nav-section">
@@ -52,7 +53,7 @@
                 <a href="contact.html">GET IN TOUCH</a>
             </div>
         </div>
-        <button id="nav--button--menu" type="button" onclick="toggleMenu()">
+        <button id="nav--button--menu" type="button">
             <i class="fa-solid fa-bars"></i>
         </button>
     </nav>
@@ -106,7 +107,7 @@
                         <h2>Work Experience</h2>
                     </div>
                     <div id="about-exp-button-container">
-                        <div class="about-exp-button-left about-exp-button" onclick="aboutExpLeft()">
+                        <div class="about-exp-button-left about-exp-button">
                             <svg width="62" height="33" viewBox="0 0 62 33" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -114,7 +115,7 @@
                                     fill="#F2F2F2" />
                             </svg>
                         </div>
-                        <div class="about-exp-button-right about-exp-button" onclick="aboutExpRight()">
+                        <div class="about-exp-button-right about-exp-button">
                             <svg width="62" height="33" viewBox="0 0 62 33" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -125,8 +126,8 @@
                     </div>
                 </div>
                 <div id="about-exp-body">
-                    <div id="about-exp-item-container">
-                        <div class="about-exp-item" data-index="0">
+                    <div id="about-exp-item-container" data-pointer-down="0" data-spacing-x="0">
+                        <div class="about-exp-item">
                             <div class="about-exp-item-date">
                                 <p>2020-current</p>
                             </div>
@@ -147,7 +148,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="about-exp-item" data-index="1">
+                        <div class="about-exp-item">
                             <div class="about-exp-item-date">
                                 <p>2021-current</p>
                             </div>
@@ -168,7 +169,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="about-exp-item" data-index="2">
+                        <div class="about-exp-item">
                             <div class="about-exp-item-date">
                                 <p>2022-current</p>
                             </div>
@@ -189,7 +190,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="about-exp-item" data-index="3">
+                        <div class="about-exp-item">
                             <div class="about-exp-item-date">
                                 <p>2023-current</p>
                             </div>
@@ -214,11 +215,256 @@
                 </div>
             </article>
         </section>
-        <section></section>
+        <section id="about-tools" class="about-section">
+            <article id="about-tools-container">
+                <div id="about-tools-title-scroll">
+                    <p class="scrolling-Title">Tools</p>
+                </div>
+                <div id="about-tools-body">
+                    <div id="about-tools-text">
+                        <div id="about-tools-text-header">
+                            <h3>My Daily Preferred Tools</h3>
+                        </div>
+                        <div id="about-tools-text-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                ut
+                                labore et dolore magna aliqua. In metus vulputate eu scelerisque felis imperdiet proin
+                                fermentum leo. Mauris vitae ultricies leo integer malesuada nunc vel risus.</p>
+                        </div>
+                    </div>
+                    <div id="about-tools-list">
+                        <div class="about-tools-list-item">
+                            <div class="about-tools-list-item-logo">
+                                <svg width="256px" height="384px" viewBox="0 0 256 384" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    preserveAspectRatio="xMidYMid">
+                                    <g>
+                                        <path
+                                            d="M64,384 C99.328,384 128,355.328 128,320 L128,256 L64,256 C28.672,256 0,284.672 0,320 C0,355.328 28.672,384 64,384 Z"
+                                            fill="#0ACF83"></path>
+                                        <path
+                                            d="M0,192 C0,156.672 28.672,128 64,128 L128,128 L128,256 L64,256 C28.672,256 0,227.328 0,192 Z"
+                                            fill="#A259FF"></path>
+                                        <path
+                                            d="M0,64 C0,28.672 28.672,0 64,0 L128,0 L128,128 L64,128 C28.672,128 0,99.328 0,64 Z"
+                                            fill="#F24E1E"></path>
+                                        <path
+                                            d="M128,0 L192,0 C227.328,0 256,28.672 256,64 C256,99.328 227.328,128 192,128 L128,128 L128,0 Z"
+                                            fill="#FF7262"></path>
+                                        <path
+                                            d="M256,192 C256,227.328 227.328,256 192,256 C156.672,256 128,227.328 128,192 C128,156.672 156.672,128 192,128 C227.328,128 256,156.672 256,192 Z"
+                                            fill="#1ABCFE"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="about-tools-list-item-title">
+                                <p>Figma</p>
+                            </div>
+                            <div class="about-tools-list-item-tag">
+                                <p>Design</p>
+                            </div>
+                        </div>
+                        <div class="about-tools-list-item">
+                            <div class="about-tools-list-item-logo">
+                                <svg width="256px" height="250px" viewBox="0 0 256 250" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+                                    <title>Adobe After Effects</title>
+                                    <g>
+                                        <rect fill="#00005B" x="0" y="0" width="256" height="249.6" rx="42.5"></rect>
+                                        <path
+                                            d="M102.842667,149.333333 L63.171872,149.333333 L55.1005227,174.4544 C54.8864633,175.345282 54.102769,175.973588 53.2000341,176.001395 L32.94688,176 C31.8010453,176 31.4003342,175.370311 31.7447467,174.110933 L66.0916267,75.6013013 L66.4349772,74.5664099 C66.4731378,74.449529 66.5113006,74.3315597 66.5494644,74.2120443 L66.7784486,73.4727403 C66.8929363,73.0901523 67.0074098,72.6854151 67.1218347,72.246176 C67.5716045,69.9550021 67.8016257,67.6261238 67.808768,65.291232 C67.7616209,64.9601635 67.8730047,64.6262074 68.1094464,64.3897237 C68.3458881,64.1532401 68.6798245,64.041797 69.0109013,64.0888853 L96.316672,64.0888853 C97.1161458,64.0888853 97.5741298,64.3751716 97.690624,64.947744 L136.673963,174.282549 C137.01718,175.428384 136.673778,176.000868 135.643755,176 L113.318229,176 C112.525013,176.088051 111.789786,175.57337 111.601045,174.79792 L102.842667,149.333333 Z M69.3546667,128.151819 L96.4885333,128.151819 L96.1024487,126.874894 L96.1024487,126.874894 L95.4807114,124.852684 L95.4807114,124.852684 L94.5721893,121.957001 L94.5721893,121.957001 L92.8274099,116.490007 L92.8274099,116.490007 L91.164576,111.235936 L91.164576,111.235936 L88.073376,101.447136 L88.073376,101.447136 C87.1903406,98.6504823 86.3701871,95.9378175 85.6129156,93.3091416 L84.7348015,90.2132727 L84.7348015,90.2132727 L83.7869734,86.8203358 L83.7869734,86.8203358 L82.9212907,83.672896 L82.9212907,83.672896 L82.7494187,83.672896 C81.8904855,87.7957243 80.8440036,91.8769607 79.6133075,95.9039017 L78.4538057,99.6264755 L78.4538057,99.6264755 L75.6636251,108.626725 L75.6636251,108.626725 L74.248896,113.210901 C73.9933741,114.039031 73.73855,114.857633 73.4844237,115.666707 L72.7241383,118.065348 L72.7241383,118.065348 L71.9680398,120.406824 L71.9680398,120.406824 L71.2161281,122.691136 L71.2161281,122.691136 L70.4684034,124.918282 C70.0955877,126.017565 69.7243422,127.09541 69.3546667,128.151819 Z M199.872917,139.555552 L166.041664,139.555552 C166.455962,142.902937 167.567552,146.126256 169.304683,149.017451 C171.225177,151.880359 173.941238,154.118907 177.118229,155.457291 C181.423953,157.3205 186.080846,158.233262 190.771349,158.133333 C194.492602,158.061946 198.199823,157.654913 201.847915,156.917184 C205.110907,156.476718 208.308633,155.643132 211.371403,154.434592 C211.942752,153.978603 212.230251,154.262976 212.230251,155.293451 L212.230251,171.608032 C212.25858,172.052541 212.169677,172.496695 211.972437,172.896053 C211.775889,173.208218 211.511753,173.472264 211.19952,173.668704 C207.802248,175.173528 204.226826,176.238657 200.559893,176.838283 C195.578408,177.77396 190.51534,178.205479 185.44736,178.126304 C177.570722,178.126304 170.931531,176.944407 165.529788,174.580614 L165.010901,174.348171 C159.817614,172.060351 155.230751,168.590693 151.616117,164.215904 C148.239622,160.093671 145.728043,155.333557 144.231221,150.219552 C142.749171,145.172 141.997444,139.938254 141.998517,134.677621 C141.983097,128.933556 142.881667,123.223584 144.660907,117.762005 C146.374313,112.434409 149.08418,107.480793 152.6464,103.164587 C156.159846,98.8988222 160.553488,95.4425443 165.526603,93.03232 C170.563061,90.571648 176.517227,89.6889173 183.386496,89.6889173 C189.083324,89.5449108 194.741816,90.6589506 199.958901,92.95168 C204.345742,94.8226862 208.207687,97.739456 211.207339,101.447168 C214.020845,105.077896 216.171846,109.176457 217.561472,113.554464 C218.914541,117.77344 219.609671,122.175662 219.622411,126.606283 C219.622411,129.125813 219.536473,131.41557 219.364597,133.475552 L219.212228,135.23977 L219.212228,135.23977 L219.051288,136.91417 L219.051288,136.91417 L218.957269,137.762157 C218.949877,137.82388 218.942595,137.883367 218.935424,137.940619 C218.843098,138.724331 218.178721,139.314835 217.389589,139.314571 L216.919028,139.324873 L216.919028,139.324873 L216.331717,139.35578 L216.331717,139.35578 L215.875315,139.387831 L215.875315,139.387831 L214.806843,139.479407 L214.806843,139.479407 L213.86928,139.572128 C213.61375,139.59853 213.348758,139.62358 213.074302,139.647278 L212.222544,139.714315 L212.222544,139.714315 L211.314006,139.77324 L211.314006,139.77324 L210.348689,139.824053 L210.348689,139.824053 L209.326593,139.866754 C209.151512,139.873195 208.974065,139.879297 208.794252,139.885062 L207.686987,139.915595 L207.686987,139.915595 C206.592089,139.941764 205.469705,139.873552 204.319303,139.789684 L202.572619,139.661981 C201.688704,139.602099 200.788878,139.555552 199.872917,139.555552 Z M166.041664,123.911115 L189.427998,123.910054 L189.427998,123.910054 L191.419677,123.898117 L191.419677,123.898117 L192.774422,123.879019 L192.774422,123.879019 L193.651298,123.859125 L193.651298,123.859125 L194.634891,123.825173 L194.634891,123.825173 C195.51585,123.737184 196.366413,123.4553 197.125557,122.999744 L197.125557,121.969269 C197.090932,120.626184 196.85949,119.295441 196.438624,118.019531 C194.534006,111.997297 188.839885,107.990324 182.528224,108.230731 C176.622839,107.873819 171.064512,111.040282 168.359989,116.30208 C167.183524,118.697435 166.400716,121.26671 166.041664,123.911115 Z"
+                                            fill="#9999FF"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="about-tools-list-item-title">
+                                <p>After Effects</p>
+                            </div>
+                            <div class="about-tools-list-item-tag">
+                                <p>Animation</p>
+                            </div>
+                        </div>
+                        <div class="about-tools-list-item">
+                            <div class="about-tools-list-item-logo">
+                                <svg width="100%" height="100%" viewBox="0 0 440 305" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    xml:space="preserve" xmlns:serif="http://www.serif.com/"
+                                    style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                                    <path
+                                        d="M325.952,89.208c-0,-0 -35.631,111.905 -38.534,121.143c-1.056,-9.501 -27.185,-210.351 -27.185,-210.351c-60.703,0 -93.166,43.284 -110.322,88.944c0,-0 -43.284,112.169 -46.979,121.671c-0.264,-8.71 -6.598,-120.351 -6.598,-120.351c-3.695,-55.953 -54.897,-90 -96.334,-90l50.146,304.309c63.607,-0.264 97.918,-43.284 115.865,-88.943c-0,-0 38.27,-98.974 39.853,-103.46c0.264,4.222 27.449,192.403 27.449,192.403c63.87,0 98.181,-40.381 116.656,-84.457l89.472,-219.852c-63.079,-0 -96.334,43.02 -113.489,88.944Z"
+                                        style="fill:#4353ff;" />
+                                </svg>
+                            </div>
+                            <div class="about-tools-list-item-title">
+                                <p>Webflow</p>
+                            </div>
+                            <div class="about-tools-list-item-tag">
+                                <p>Dev</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
         <section class="about-section about-background">
             <div id="about--gradient"></div>
             <div id="about--gradient--small"></div>
         </section>
+        <section id="about-contact" class="about-section">
+            <article class="about-contact-banner">
+                <a href="/contact.html">
+                    <div class="about-contact-banner-wrapper">
+                        <div class="about-contact-banner-dot"></div>
+                        <h4>Get in Touch</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Just Say Hi</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Work Together?</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Contact Me</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Get in Touch</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Just Say Hi</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Work Together?</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Contact Me</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Get in Touch</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Just Say Hi</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Work Together?</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Contact Me</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Get in Touch</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Just Say Hi</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Work Together?</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Contact Me</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Get in Touch</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Just Say Hi</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Work Together?</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                    <div class="about-contact-banner-wrapper">
+                        <h4>Contact Me</h4>
+                        <div class="about-contact-banner-img">
+                            <img src="/img/right-arrow.svg" alt="right arrow">
+                        </div>
+                        <div class="about-contact-banner-dot"></div>
+                    </div>
+                </a>
+            </article>
+        </section>
+        <footer id="privacyPolicy--footer">
+            <div class="contact--footer--wrapper">
+                <span> 2022 © Recreation from Scratch of <a href="https://www.dylanbrouwer.design/">
+                        dylanbrouwer.design</a> by
+                    Altan Bael</span>
+                <a href="privacy-policy.html">Privacy Policy</a>
+            </div>
+        </footer>
         <div id="privacyPolicy--noise--background"></div>
     </main>
 </body>
