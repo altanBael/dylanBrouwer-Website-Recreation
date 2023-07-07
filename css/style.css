@@ -27,11 +27,11 @@
 }
 @font-face {
   font-family: "Montserrat";
-  src: url(/font/Montserrat/Montserrat-VariableFont_wght.ttf);
+  src: url(../font/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 @font-face {
   font-family: "Space Grotesk";
-  src: url(/font/SpaceGrotesk/SpaceGrotesk-VariableFont_wght.ttf);
+  src: url(../font/SpaceGrotesk/SpaceGrotesk-VariableFont_wght.ttf);
 }
 ::-webkit-scrollbar {
   width: var(--scrollbar--width);
@@ -276,7 +276,7 @@ main > article > .article-section {
   border-top: 1px solid var(--border-color);
 }
 .article--image {
-  background: url(/img/BotHeadFanArt.jpg) no-repeat center;
+  background: url(../img/BotHeadFanArt.jpg) no-repeat center;
   background-size: auto;
 }
 .article--description {
